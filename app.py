@@ -504,4 +504,4 @@ with st.form(key='contact_form'):
             st.success("Thank you for your message! I will get back to you shortly.")
         else:
             st.error("Please fill out all the fields before sending.")
-�
+
