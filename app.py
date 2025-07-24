@@ -100,25 +100,22 @@ div[data-testid="stVerticalBlockBorderWrapper"],
 div[data-testid="stVerticalBlock"] > div[style*="border"],
 .stContainer > div,
 [class*="stVertical"] {
-    background: linear-gradient(135deg, rgba(199, 125, 255, 0.15), rgba(255, 255, 255, 0.1)) !important;
-    backdrop-filter: blur(15px) !important;
-    border: 2px solid rgba(199, 125, 255, 0.4) !important;
-    border-radius: 15px !important;
-    padding: 2rem !important;
-    margin: 1.5rem 0 !important;
-    box-shadow: 0 8px 32px rgba(199, 125, 255, 0.1) !important;
-    transition: all 0.3s ease !important;
-    position: relative !important;
-    overflow: hidden !important;
+   background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    margin-bottom: 2rem;
+    height:auto;
 }
 
 /* Enhanced hover effects */
 div[data-testid="stVerticalBlockBorderWrapper"]:hover,
 div[data-testid="stVerticalBlock"] > div[style*="border"]:hover {
-    transform: translateY(-8px) !important;
-    box-shadow: 0 15px 40px rgba(199, 125, 255, 0.3) !important;
-    border-color: rgba(199, 125, 255, 0.8) !important;
-    background: linear-gradient(135deg, rgba(199, 125, 255, 0.25), rgba(255, 255, 255, 0.15)) !important;
+   transform: translateY(-10px);
+    box-shadow: 0 0 40px rgba(199, 125, 255, 0.3);
+    border-color: rgba(199, 125, 255, 0.5);
 }
 
 /* --- BULLETPROOF NAVBAR --- */
