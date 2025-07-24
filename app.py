@@ -11,276 +11,128 @@ st.set_page_config(
 # --- CUSTOM STYLING ---
 # --- CUSTOM STYLING ---
 st.markdown("""
-<style>
-/* --- Font Import --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+st.html("""
+    <style>
+        /* --- Font Import --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* --- Base Styles --- */
-html {
-    scroll-behavior: smooth;
-}
+        /* --- Base Styles --- */
+        html {
+            scroll-behavior: smooth;
+        }
 
-html, body, [class*="st-"] {
-    font-family: 'Poppins', sans-serif;
-}
+        html, body, [class*="st-"] {
+            font-family: 'Poppins', sans-serif;
+        }
 
-.stApp {
-    background-color: #111111; /* Very dark background */
-    color: #e0e0e0; /* Off-white text for readability */
-    background-image: linear-gradient(to right top, #111111, #161319, #1a151f, #1e1725, #22182b);
-            
-}
+        .stApp {
+            background-color: #111111;
+            color: #e0e0e0;
+            background-image: linear-gradient(to right top, #111111, #161319, #1a151f, #1e1725, #22182b);
+        }
 
-/* --- Main Content Styling --- */
-.main .block-container {
-    padding-top: 8rem; /* Increased padding to account for navbar */
-    padding-bottom: 3rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    max-width: 900px; 
-    margin: auto;
-}
+        /* --- Main Content Styling --- */
+        .main .block-container {
+            padding-top: 8rem; 
+            padding-bottom: 3rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            max-width: 900px; 
+            margin: auto;
+        }
 
-/* --- Headers and Text --- */
-h1, h2, h3 {
-    font-weight: 700;
-    color: #ffffff;
-}
+        /* --- Headers and Text --- */
+        h1, h2, h3 { font-weight: 700; color: #ffffff; }
+        h1 { font-size: 3.5rem; margin-bottom: 0.5rem; text-align: center; letter-spacing: -1px; }
+        h2 { font-size: 2.5rem; color: #c77dff; border-bottom: 2px solid #c77dff; padding-bottom: 0.8rem; margin-top: 5rem; margin-bottom: 1.5rem; text-shadow: 0 0 10px rgba(199, 125, 255, 0.3); }
+        h3 { font-size: 1.75rem; margin-top: 0; margin-bottom: 1rem; color: #c77dff; }
 
-h1 {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-    letter-spacing: -1px;
-}
+        /* --- Profile Image --- */
+        .profile-img { width: 320px; height: 320px; border-radius: 20%; object-fit: cover; border: 4px solid #c77dff; box-shadow: 0 0 30px rgba(199, 125, 255, 0.5); margin: 60px auto 1.5rem auto; display: block; }
 
-h2 {
-    font-size: 2.5rem;
-    color: #c77dff; /* Neon Purple Accent */
-    border-bottom: 2px solid #c77dff;
-    padding-bottom: 0.8rem;
-    margin-top: 5rem;
-    margin-bottom: 1.5rem; 
-    text-shadow: 0 0 10px rgba(199, 125, 255, 0.3);
-}
+        /* --- Custom Info Box (st.info) --- */
+        .stAlert { background-color: rgba(199, 125, 255, 0.1); border-radius: 10px; text-align: center; padding: .25rem; font-size: 1.1rem; max-width: 70%; margin: auto; border: 1px solid rgba(199, 125, 255, 0.2); }
 
-h3 {
-    font-size: 1.75rem;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    color: #c77dff;
-}
+        /* --- Social Icons --- */
+        .social-icons { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+        .social-icons a { transition: transform 0.3s; }
+        .social-icons a:hover { transform: scale(1.2); }
+        .social-icons svg { stroke: #e0e0e0; transition: stroke 0.3s; }
+        .social-icons a:hover svg { stroke: #c77dff; }
 
-/* --- Profile Image --- */
-.profile-img {
-    width: 320px;
-    height: 320px;
-    border-radius: 20%;
-    object-fit: cover;
-    border: 4px solid #c77dff;
-    box-shadow: 0 0 30px rgba(199, 125, 255, 0.5);
-    margin: 60px auto 1.5rem auto;
-    display: block;
-}
+        /* --- Project and Experience Cards (using st.container) --- CORRECTED --- */
+        .main .block-container [data-testid="stVerticalBlockBorderWrapper"] {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            margin-bottom: 2rem;
+            height: auto;
+        }
 
-/* --- Custom Info Box (st.info) --- */
-.stAlert {
-    background-color: rgba(199, 125, 255, 0.1);
-    border-radius: 10px;
-    text-align: center;
-    padding: .25rem;
-    font-size: 1.1rem;
-    max-width: 70%;
-    margin: auto;
-    border: 1px solid rgba(199, 125, 255, 0.2);
-}
+        .main .block-container [data-testid="stVerticalBlockBorderWrapper"]:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(199, 125, 255, 0.3);
+            border-color: rgba(199, 125, 255, 0.5);
+        }
+        
+        /* --- Link Button Styling --- */
+        .stButton>button { color: #c77dff; background-color: transparent; border: 1px solid #c77dff; border-radius: 25px; padding: 0.75rem 1.5rem; font-weight: 600; transition: all 0.3s ease-in-out; }
+        .stButton>button:hover { background-color: #c77dff; color: #ffffff; border-color: #c77dff; box-shadow: 0 0 15px rgba(199, 125, 255, 0.5); }
 
-/* --- Social Icons --- */
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-}
+        /* --- Skills List --- */
+        .skills-list { list-style-type: none; padding: 0; }
+        .skills-list li { background-color: rgba(199, 125, 255, 0.1); color: #c77dff; padding: 0.5rem 1rem; margin: 0.4rem; border-radius: 7px; display: inline-block; font-weight: 500; border: 1px solid rgba(199, 125, 255, 0.2); }
 
-.social-icons a {
-    transition: transform 0.3s;
-}
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(17, 17, 17, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .navbar a { color: #e0e0e0; margin: 0 15px; text-decoration: none; font-weight: 500; transition: color 0.3s; position: relative; padding-bottom: 5px; }
+        .navbar a:hover { color: #c77dff; }
+        .navbar a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #c77dff; transition: width 0.3s ease-in-out; }
+        .navbar a:hover::after { width: 100%; }
 
-.social-icons a:hover {
-    transform: scale(1.2);
-}
+        /* --- Anchor for Navbar Jumps --- */
+        .section-anchor { scroll-margin-top: 100px; }
 
-.social-icons svg {
-    stroke: #e0e0e0;
-    transition: stroke 0.3s;
-}
+        /* --- Responsive Project Image --- */
+        .project-img { width: 100%; height: auto; border-radius: 15px; margin-bottom: 1rem; }
 
-.social-icons a:hover svg {
-    stroke: #c77dff;
-}
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            .main .block-container { padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 10rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.4rem; }
+            .navbar { padding: 1rem 0.5rem; flex-wrap: wrap; justify-content: center; }
+            .navbar a { margin: 5px 10px; font-size: 0.9rem; }
+            .section-anchor { scroll-margin-top: 150px; }
+            .main .block-container [data-testid="stVerticalBlockBorderWrapper"] { padding: 1.5rem; } /* Also specified for mobile */
+        }
+    </style>
 
-
-/* --- Project and Experience Cards (using st.container) --- */
-[data-testid="stVerticalBlockBorderWrapper"] {
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    margin-bottom: 2rem;
-    height:auto;
-}
-
-[data-testid="stVerticalBlockBorderWrapper"]:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 40px rgba(199, 125, 255, 0.3);
-    border-color: rgba(199, 125, 255, 0.5);
-}
-            
-
-/* --- Link Button Styling --- */
-.stButton>button {
-    color: #c77dff;
-    background-color: transparent;
-    border: 1px solid #c77dff;
-    border-radius: 25px;
-    padding: 0.75rem 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease-in-out;
-}
-
-.stButton>button:hover {
-    background-color: #c77dff;
-    color: #ffffff;
-    border-color: #c77dff;
-    box-shadow: 0 0 15px rgba(199, 125, 255, 0.5);
-}
-
-/* --- Skills List --- */
-.skills-list {
-    list-style-type: none;
-    padding: 0;
-}
-.skills-list li {
-    background-color: rgba(199, 125, 255, 0.1);
-    color: #c77dff;
-    padding: 0.5rem 1rem;
-    margin: 0.4rem;
-    border-radius: 7px;
-    display: inline-block;
-    font-weight: 500;
-    border: 1px solid rgba(199, 125, 255, 0.2);
-}
-
-/* --- Navbar --- CORRECTED */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(17, 17, 17, 0.85);
-    backdrop-filter: blur(10px);
-    padding: 1rem 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.navbar a {
-    color: #e0e0e0;
-    margin: 0 15px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-    position: relative;
-    padding-bottom: 5px;
-}
-
-.navbar a:hover {
-    color: #c77dff;
-}
-
-.navbar a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #c77dff;
-    transition: width 0.3s ease-in-out;
-}
-
-.navbar a:hover::after {
-    width: 100%;
-}
-
-
-/* --- Anchor for Navbar Jumps --- */
-.section-anchor {
-    scroll-margin-top: 100px;
-}
-
-/* --- Responsive Project Image --- */
-.project-img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    margin-bottom: 1rem;
-}
-
-/* --- Mobile Optimization --- */
-@media (max-width: 768px) {
-    .main .block-container {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-    h1 {
-        font-size: 2.5rem;
-    }
-    h2 {
-        font-size: 1.8rem;
-    }
-    h3 {
-        font-size: 1.4rem;
-    }
-    .navbar {
-        padding: 1rem 0.5rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .navbar a {
-        margin: 5px 10px;
-        font-size: 0.9rem;
-    }
-    .main .block-container {
-        padding-top: 10rem;
-    }
-    .section-anchor {
-        scroll-margin-top: 150px;
-    }
-    [data-testid="stVerticalBlockBorderWrapper"] {
-        padding: 1.5rem;
-    }
-}
-
-</style>
-""", unsafe_allow_html=True)
-
-
-# --- NAVIGATION BAR ---
-st.markdown("""
-<div class="navbar">
-    <a href="#about">About Me</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-</div>
+    <div class="navbar">
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+    </div>
+""")
 """, unsafe_allow_html=True)
 
 
