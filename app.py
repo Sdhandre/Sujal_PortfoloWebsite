@@ -189,7 +189,7 @@ h3 {
     align-items: center;
     z-index: 999;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+
 }
 
 .navbar a {
