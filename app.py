@@ -9,6 +9,7 @@ st.set_page_config(
 )
 
 # --- CUSTOM STYLING ---
+# --- CUSTOM STYLING ---
 st.markdown("""
 <style>
 /* --- Font Import --- */
@@ -89,7 +90,7 @@ h3 {
     text-align: center;
     padding: .25rem;
     font-size: 1.1rem;
-    max-width: 70%; /* Adjust this percentage to make the box wider or narrower */
+    max-width: 70%;
     margin: auto;
     border: 1px solid rgba(199, 125, 255, 0.2);
 }
@@ -130,8 +131,6 @@ h3 {
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     margin-bottom: 2rem;
     height:auto;
-            
-    
 }
 
 [data-testid="stVerticalBlockBorderWrapper"]:hover {
@@ -175,7 +174,7 @@ h3 {
     border: 1px solid rgba(199, 125, 255, 0.2);
 }
 
-/* --- Navbar --- */
+/* --- Navbar --- CORRECTED */
 .navbar {
     position: fixed;
     top: 0;
@@ -189,7 +188,6 @@ h3 {
     align-items: center;
     z-index: 999;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
 }
 
 .navbar a {
@@ -224,13 +222,13 @@ h3 {
 
 /* --- Anchor for Navbar Jumps --- */
 .section-anchor {
-    scroll-margin-top: 100px; /* Adjust this value based on navbar height */
+    scroll-margin-top: 100px;
 }
 
 /* --- Responsive Project Image --- */
 .project-img {
     width: 100%;
-    height: auto; /* This makes the image responsive */
+    height: auto;
     border-radius: 15px;
     margin-bottom: 1rem;
 }
@@ -252,7 +250,7 @@ h3 {
     }
     .navbar {
         padding: 1rem 0.5rem;
-        flex-wrap: wrap; /* Allows links to wrap to the next line */
+        flex-wrap: wrap;
         justify-content: center;
     }
     .navbar a {
