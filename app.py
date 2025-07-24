@@ -10,19 +10,15 @@ st.set_page_config(
 )
 
 # --- HTML & CSS INJECTION ---
+# --- HTML & CSS INJECTION ---
 st.html("""
     <style>
         /* --- Font Import --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
         /* --- Base Styles --- */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        html, body, [class*="st-"] {
-            font-family: 'Poppins', sans-serif;
-        }
+        html { scroll-behavior: smooth; }
+        html, body, [class*="st-"] { font-family: 'Poppins', sans-serif; }
 
         .stApp {
             background-color: #111111;
@@ -59,8 +55,12 @@ st.html("""
         .social-icons svg { stroke: #e0e0e0; transition: stroke 0.3s; }
         .social-icons a:hover svg { stroke: #c77dff; }
 
-        /* --- Project and Experience Cards (using st.container) --- */
+        /* --- Project and Experience Cards --- FINAL FIX --- */
         .main .block-container [data-testid="stVerticalBlockBorderWrapper"] {
+            /* ADDED: Establish a new stacking context to fix hover issues */
+            position: relative;
+            z-index: 1;
+
             background-color: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border-radius: 15px;
@@ -77,41 +77,22 @@ st.html("""
             border-color: rgba(199, 125, 255, 0.5);
         }
         
-        /* --- Link Button Styling --- */
+        /* --- Other Styles --- */
         .stButton>button { color: #c77dff; background-color: transparent; border: 1px solid #c77dff; border-radius: 25px; padding: 0.75rem 1.5rem; font-weight: 600; transition: all 0.3s ease-in-out; }
         .stButton>button:hover { background-color: #c77dff; color: #ffffff; border-color: #c77dff; box-shadow: 0 0 15px rgba(199, 125, 255, 0.5); }
 
-        /* --- Skills List --- */
         .skills-list { list-style-type: none; padding: 0; }
         .skills-list li { background-color: rgba(199, 125, 255, 0.1); color: #c77dff; padding: 0.5rem 1rem; margin: 0.4rem; border-radius: 7px; display: inline-block; font-weight: 500; border: 1px solid rgba(199, 125, 255, 0.2); }
 
-        /* --- Navbar --- */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(17, 17, 17, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(17, 17, 17, 0.85); backdrop-filter: blur(10px); padding: 1rem 5rem; display: flex; justify-content: center; align-items: center; z-index: 9999; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .navbar a { color: #e0e0e0; margin: 0 15px; text-decoration: none; font-weight: 500; transition: color 0.3s; position: relative; padding-bottom: 5px; }
         .navbar a:hover { color: #c77dff; }
         .navbar a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background-color: #c77dff; transition: width 0.3s ease-in-out; }
         .navbar a:hover::after { width: 100%; }
 
-        /* --- Anchor for Navbar Jumps --- */
         .section-anchor { scroll-margin-top: 100px; }
-
-        /* --- Responsive Project Image --- */
         .project-img { width: 100%; height: auto; border-radius: 15px; margin-bottom: 1rem; }
 
-        /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
             .main .block-container { padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 10rem; }
             h1 { font-size: 2.5rem; }
@@ -132,6 +113,8 @@ st.html("""
         <a href="#contact">Contact</a>
     </div>
 """)
+
+
 
 # --- SOCIAL LINKS ---
 SOCIAL_MEDIA = {
