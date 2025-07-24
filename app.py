@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import requests
 
 # --- PAGE SETUP ---
 st.set_page_config(
@@ -8,9 +9,7 @@ st.set_page_config(
     layout="wide",
 )
 
-# --- CUSTOM STYLING ---
-# --- CUSTOM STYLING ---
-st.markdown("""
+# --- HTML & CSS INJECTION ---
 st.html("""
     <style>
         /* --- Font Import --- */
@@ -60,7 +59,7 @@ st.html("""
         .social-icons svg { stroke: #e0e0e0; transition: stroke 0.3s; }
         .social-icons a:hover svg { stroke: #c77dff; }
 
-        /* --- Project and Experience Cards (using st.container) --- CORRECTED --- */
+        /* --- Project and Experience Cards (using st.container) --- */
         .main .block-container [data-testid="stVerticalBlockBorderWrapper"] {
             background-color: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -121,7 +120,7 @@ st.html("""
             .navbar { padding: 1rem 0.5rem; flex-wrap: wrap; justify-content: center; }
             .navbar a { margin: 5px 10px; font-size: 0.9rem; }
             .section-anchor { scroll-margin-top: 150px; }
-            .main .block-container [data-testid="stVerticalBlockBorderWrapper"] { padding: 1.5rem; } /* Also specified for mobile */
+            .main .block-container [data-testid="stVerticalBlockBorderWrapper"] { padding: 1.5rem; }
         }
     </style>
 
@@ -133,13 +132,11 @@ st.html("""
         <a href="#contact">Contact</a>
     </div>
 """)
-""", unsafe_allow_html=True)
 
-
-# --- SOCIAL LINKS (Optimized) ---
+# --- SOCIAL LINKS ---
 SOCIAL_MEDIA = {
     "LinkedIn": "https://linkedin.com",
-    "GitHub": "https://github.com",
+    "GitHub": "https://github.com/Sdhandre",
     "Email": "mailto:sujal.dhandre@gmail.com",
 }
 SOCIAL_ICONS = {
@@ -150,7 +147,6 @@ SOCIAL_ICONS = {
 
 
 # --- HERO SECTION ---
-# --- Profile Image ---
 try:
     with open("SUJALPIC.png", "rb") as f:
         data = f.read()
@@ -165,7 +161,6 @@ except FileNotFoundError:
 st.markdown('<h1>Sujal Dhandre</h1>', unsafe_allow_html=True)
 st.info("Why Streamlit? Because as a data scientist, I like my websites like my models: built in Python and deployed before lunch.")
 
-# --- Social Links ---
 social_icons_html = '<div class="social-icons">'
 for name, link in SOCIAL_MEDIA.items():
     icon_svg = SOCIAL_ICONS.get(name, "")
@@ -269,7 +264,7 @@ with st.container(border=True):
     with col2:
         st.subheader("Live Face Detction App")
         st.write("""
-        - Real-Time Face Recognition: Instantly detects and identifies faces using advanced AI algorithms for fast and accurate results
+        - Real-Time Face Recognition: Instantly detects and identifies faces using advanced AI algorithms for fast and accurate results.
         - User-Friendly Interface: Simple, intuitive design enables users to easily upload photos or use live camera for face detection.
         - High Accuracy & Security: Utilizes the latest machine learning technology to ensure precise detection while keeping user data secure and private.
         """)
@@ -334,10 +329,7 @@ st.markdown('<div id="contact" class="section-anchor"></div>', unsafe_allow_html
 st.markdown('<h2>Get In Touch!</h2>', unsafe_allow_html=True)
 st.write("My inbox is always open. Whether you have a question, a project idea, or just want to connect, feel free to reach out!")
 
-# Use a real form endpoint from a service like Formspree
-# Store your Formspree endpoint in Streamlit's secrets management
-# Example: FORM_ENDPOINT = "https://formspree.io/f/your_form_id_here"
-FORM_ENDPOINT = st.secrets.get("FORM_ENDPOINT", "YOUR_FORM_ENDPOINT_HERE") 
+FORM_ENDPOINT = st.secrets.get("FORM_ENDPOINT") 
 
 with st.form(key='contact_form'):
     name = st.text_input("Your Name", key="user_name")
@@ -347,9 +339,7 @@ with st.form(key='contact_form'):
 
     if submit_button:
         if name and email and message:
-            # Check if a real endpoint is configured
-            if FORM_ENDPOINT != "YOUR_FORM_ENDPOINT_HERE":
-                import requests
+            if FORM_ENDPOINT:
                 try:
                     response = requests.post(
                         FORM_ENDPOINT,
@@ -362,9 +352,7 @@ with st.form(key='contact_form'):
                 except requests.exceptions.RequestException as e:
                     st.error(f"An error occurred: {e}")
             else:
-                 # Fallback for local testing without secrets
-                st.warning("Contact form is in testing mode. To enable, configure the FORM_ENDPOINT secret.")
+                st.warning("Contact form is not configured. This is a demo.")
                 st.info(f"**Name:** {name}\n\n**Email:** {email}\n\n**Message:** {message}")
-
         else:
             st.error("Please fill out all the fields before sending.")
