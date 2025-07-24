@@ -28,7 +28,6 @@ html, body, [class*="st-"] {
     background-color: #111111; /* Very dark background */
     color: #e0e0e0; /* Off-white text for readability */
     background-image: linear-gradient(to right top, #111111, #161319, #1a151f, #1e1725, #22182b);
-            
 }
 
 /* --- Main Content Styling --- */
@@ -79,7 +78,7 @@ h3 {
     object-fit: cover;
     border: 4px solid #c77dff;
     box-shadow: 0 0 30px rgba(199, 125, 255, 0.5);
-    margin: 60px auto 1.5rem auto;
+    margin: 15px auto 1.5rem auto;
     display: block;
 }
 
@@ -121,26 +120,22 @@ h3 {
 }
 
 
-/* --- Project and Experience Cards (using st.container) --- */
-[data-testid="stVerticalBlockBorderWrapper"] {
+/* --- Custom Card Container --- */
+.card {
     background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    padding: 1rem;
+    padding: 2.5rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     margin-bottom: 2rem;
-    height:auto;
-            
-    
 }
 
-[data-testid="stVerticalBlockBorderWrapper"]:hover {
+.card:hover {
     transform: translateY(-10px);
     box-shadow: 0 0 40px rgba(199, 125, 255, 0.3);
     border-color: rgba(199, 125, 255, 0.5);
 }
-            
 
 /* --- Link Button Styling --- */
 .stButton>button {
@@ -190,7 +185,6 @@ h3 {
     align-items: center;
     z-index: 999;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
 }
 
 .navbar a {
@@ -266,7 +260,7 @@ h3 {
     .section-anchor {
         scroll-margin-top: 150px;
     }
-    [data-testid="stVerticalBlockBorderWrapper"] {
+    .card {
         padding: 1.5rem;
     }
 }
@@ -327,13 +321,16 @@ st.markdown(social_icons_html, unsafe_allow_html=True)
 # --- ABOUT ME ---
 st.markdown('<div id="about" class="section-anchor"></div>', unsafe_allow_html=True)
 st.markdown('<h2>About Me</h2>', unsafe_allow_html=True)
+st.markdown('<div class="card">', unsafe_allow_html=True)
 st.write("""
 Hello! I'm **Sujal Dhandre**, a passionate and driven Machine Learning enthusiast. My journey into the world of AI and ML began with a fascination for how data can be transformed into actionable insights and intelligent systems. I thrive on tackling complex problems and am constantly exploring new algorithms and techniques to build efficient and impactful models. I have a strong foundation in Python, statistical modeling, and popular ML frameworks like Scikit-learn, TensorFlow, and PyTorch. My goal is to leverage my skills to contribute to innovative projects that solve real-world challenges.
 """)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- SKILLS ---
 st.markdown('<div id="skills" class="section-anchor"></div>', unsafe_allow_html=True)
 st.markdown('<h2>Technical Skills</h2>', unsafe_allow_html=True)
+st.markdown('<div class="card">', unsafe_allow_html=True)
 st.markdown("""
 <ul class="skills-list">
   <li>Python</li>
@@ -355,77 +352,81 @@ st.markdown("""
   <li>Cybersecurity</li>
 </ul>
 """, unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- PROJECTS ---
 st.markdown('<div id="projects" class="section-anchor"></div>', unsafe_allow_html=True)
 st.markdown('<h2>My Projects</h2>', unsafe_allow_html=True)
 st.write("Below are some of my key projects, showcasing my skills in deep learning, computer vision, and recommendation systems.")
 
-with st.container(border=True):
-    col1, col2 = st.columns([1, 1.5])
-    with col1:
-        try:
-            with open("agriscan.png", "rb") as img_file:
-                agriscan_base64 = base64.b64encode(img_file.read()).decode()
-                st.markdown(
-                    f'<img src="data:image/png;base64,{agriscan_base64}" class="project-img">',
-                    unsafe_allow_html=True
-                )
-        except FileNotFoundError:
-            st.image("https://placehold.co/600x400/161b22/c77dff?text=AgriScan", use_container_width=True)
-    with col2:
-        st.subheader("Plant Leaf Disease Detection App - AgriScan")
-        st.write("""
-        - Developed a deep learning image classification model to detect plant diseases from leaf images using Convolutional Neural Networks (CNNs).
-        - Classified 13+ plant diseases using a dataset of over 10,000 leaf images.
-        - **Achieved a 92% accuracy rate with the final model.**
-        """)
-        st.markdown("`Python` `TensorFlow` `Keras` `CNN`")
-        st.link_button("View Source Code and Link", "https://github.com/Sdhandre/plant-disease-streamlit")
+st.markdown('<div class="card">', unsafe_allow_html=True)
+col1, col2 = st.columns([1, 1.5])
+with col1:
+    try:
+        with open("agriscan.png", "rb") as img_file:
+            agriscan_base64 = base64.b64encode(img_file.read()).decode()
+            st.markdown(
+                f'<img src="data:image/png;base64,{agriscan_base64}" class="project-img">',
+                unsafe_allow_html=True
+            )
+    except FileNotFoundError:
+        st.image("https://placehold.co/600x400/161b22/c77dff?text=AgriScan", use_container_width=True)
+with col2:
+    st.subheader("Plant Leaf Disease Detection App - AgriScan")
+    st.write("""
+    - Developed a deep learning image classification model to detect plant diseases from leaf images using Convolutional Neural Networks (CNNs).
+    - Classified 13+ plant diseases using a dataset of over 10,000 leaf images.
+    - **Achieved a 92% accuracy rate with the final model.**
+    """)
+    st.markdown("`Python` `TensorFlow` `Keras` `CNN`")
+    st.link_button("View Source Code and Link", "https://github.com/Sdhandre/plant-disease-streamlit")
+st.markdown('</div>', unsafe_allow_html=True)
 
-with st.container(border=True):
-    col1, col2 = st.columns([1.5, 1])
-    with col1:
-        st.subheader("CineMatch AI - Movie Recommendation Model")
-        st.write("""
-        - Trained a recommendation model on a dataset of over 25,000 user ratings.
-        - **Achieved over 90% accuracy in predicting user movie preferences.**
-        - Reduced absenteeism prediction error by 20% through feature selection and optimization.
-        """)
-        st.markdown("`Python` `Pandas` `Scikit-learn`")
-        st.link_button("View Source Code and Link", "https://github.com/Sdhandre/Cinematch_AI")
-    with col2:
-        try:
-            with open("cinematch.png", "rb") as img_file:
-                cinematch_base64 = base64.b64encode(img_file.read()).decode()
-                st.markdown(
-                    f'<img src="data:image/png;base64,{cinematch_base64}" class="project-img">',
-                    unsafe_allow_html=True
-                )
-        except FileNotFoundError:
-            st.image("https://placehold.co/600x400/161b22/c77dff?text=CineMatch", use_container_width=True)
+st.markdown('<div class="card">', unsafe_allow_html=True)
+col1, col2 = st.columns([1.5, 1])
+with col1:
+    st.subheader("CineMatch AI - Movie Recommendation Model")
+    st.write("""
+    - Trained a recommendation model on a dataset of over 25,000 user ratings.
+    - **Achieved over 90% accuracy in predicting user movie preferences.**
+    - Reduced absenteeism prediction error by 20% through feature selection and optimization.
+    """)
+    st.markdown("`Python` `Pandas` `Scikit-learn`")
+    st.link_button("View Source Code and Link", "https://github.com/Sdhandre/Cinematch_AI")
+with col2:
+    try:
+        with open("cinematch.png", "rb") as img_file:
+            cinematch_base64 = base64.b64encode(img_file.read()).decode()
+            st.markdown(
+                f'<img src="data:image/png;base64,{cinematch_base64}" class="project-img">',
+                unsafe_allow_html=True
+            )
+    except FileNotFoundError:
+        st.image("https://placehold.co/600x400/161b22/c77dff?text=CineMatch", use_container_width=True)
+st.markdown('</div>', unsafe_allow_html=True)
 
-with st.container(border=True):
-    col1, col2 = st.columns([1, 1.5])
-    with col1:
-        try:
-            with open("facescan.png", "rb") as img_file:
-                facescan_base64 = base64.b64encode(img_file.read()).decode()
-                st.markdown(
-                    f'<img src="data:image/png;base64,{facescan_base64}" class="project-img">',
-                    unsafe_allow_html=True
-                )
-        except FileNotFoundError:
-            st.image("https://placehold.co/600x400/161b22/c77dff?text=FaceScan", use_container_width=True)
-    with col2:
-        st.subheader("Live Face Detction App")
-        st.write("""
-        - Real-Time Face Recognition: Instantly detects and identifies faces using advanced AI algorithms for fast and accurate results
-        - User-Friendly Interface: Simple, intuitive design enables users to easily upload photos or use live camera for face detection.
-        - High Accuracy & Security: Utilizes the latest machine learning technology to ensure precise detection while keeping user data secure and private.
-        """)
-        st.markdown("`Python` `OpenCV` `Tensorflow-GPU`")
-        st.link_button("View Source Code and Link", "https://github.com/Sdhandre/REAL-TIME-FACE-DETECTION-MODEL")
+st.markdown('<div class="card">', unsafe_allow_html=True)
+col1, col2 = st.columns([1, 1.5])
+with col1:
+    try:
+        with open("facescan.png", "rb") as img_file:
+            facescan_base64 = base64.b64encode(img_file.read()).decode()
+            st.markdown(
+                f'<img src="data:image/png;base64,{facescan_base64}" class="project-img">',
+                unsafe_allow_html=True
+            )
+    except FileNotFoundError:
+        st.image("https://placehold.co/600x400/161b22/c77dff?text=FaceScan", use_container_width=True)
+with col2:
+    st.subheader("Live Face Detction App")
+    st.write("""
+    - Real-Time Face Recognition: Instantly detects and identifies faces using advanced AI algorithms for fast and accurate results
+    - User-Friendly Interface: Simple, intuitive design enables users to easily upload photos or use live camera for face detection.
+    - High Accuracy & Security: Utilizes the latest machine learning technology to ensure precise detection while keeping user data secure and private.
+    """)
+    st.markdown("`Python` `OpenCV` `Tensorflow-GPU`")
+    st.link_button("View Source Code and Link", "https://github.com/Sdhandre/REAL-TIME-FACE-DETECTION-MODEL")
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # --- INTERNSHIPS ---
@@ -433,51 +434,56 @@ st.markdown('<div id="experience" class="section-anchor"></div>', unsafe_allow_h
 st.markdown('<h2>Internship Experience</h2>', unsafe_allow_html=True)
 st.write("I have had the opportunity to work with and learn from talented teams in professional settings.")
 
-with st.container(border=True):
-    st.subheader("Data Science and Machine Learning Intern")
-    st.write("**Feynn Labs** | Apr 2025 - Present")
-    st.write("""
-    - Initiated internship with a machine learning-based product ideation task for a scalable business solution.
-    - Mapped real-world problems to ML models and conducted competitive analysis.
-    """)
+st.markdown('<div class="card">', unsafe_allow_html=True)
+st.subheader("Data Science and Machine Learning Intern")
+st.write("**Feynn Labs** | Apr 2025 - Present")
+st.write("""
+- Initiated internship with a machine learning-based product ideation task for a scalable business solution.
+- Mapped real-world problems to ML models and conducted competitive analysis.
+""")
+st.markdown('</div>', unsafe_allow_html=True)
 
-with st.container(border=True):
-    st.subheader("Frontend Developer Intern")
-    st.write("**Prodigy Infotech** | Jun 2024 - Jul 2024")
-    st.write("""
-    - Built 4+ projects including a Weather App with API integration, a functional Stopwatch, Tic-Tac-Toe, and a responsive Landing Page using HTML, CSS, and JavaScript.
-    """)
+st.markdown('<div class="card">', unsafe_allow_html=True)
+st.subheader("Frontend Developer Intern")
+st.write("**Prodigy Infotech** | Jun 2024 - Jul 2024")
+st.write("""
+- Built 4+ projects including a Weather App with API integration, a functional Stopwatch, Tic-Tac-Toe, and a responsive Landing Page using HTML, CSS, and JavaScript.
+""")
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- EDUCATION ---
 st.markdown('<h2>Education</h2>', unsafe_allow_html=True)
 st.write("My formal education has provided me with a strong foundation in computer science and engineering principles.")
 
-with st.container(border=True):
-    st.subheader("Bachelor of Technology in Computer Science & Engineering")
-    st.write("**Medicaps University, Indore** | 2022 - 2026")
-    st.write("Current SGPA: **8.5/10.0**")
-    st.write("Relevant Coursework: `Data Structures`, `Algorithms`, `Machine Learning`, `Database Management Systems`, `Linear Algebra`.")
+st.markdown('<div class="card">', unsafe_allow_html=True)
+st.subheader("Bachelor of Technology in Computer Science & Engineering")
+st.write("**Medicaps University, Indore** | 2022 - 2026")
+st.write("Current SGPA: **8.5/10.0**")
+st.write("Relevant Coursework: `Data Structures`, `Algorithms`, `Machine Learning`, `Database Management Systems`, `Linear Algebra`.")
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- RESEARCH & CERTIFICATIONS ---
 st.markdown('<h2>Research & Certifications</h2>', unsafe_allow_html=True)
 st.write("I am committed to continuous learning and have pursued research and certifications to deepen my expertise.")
 
-with st.container(border=True):
-    st.write("- **Research Paper (IJEART):** *Integrating Blockchain in 5G Technologies* (Feb 2024)")
-    st.write("- **Data Science Bootcamp (Udemy):** *Machine Learning and Data Analysis* (Jan 2025)")
-    st.write("- **Google Cybersecurity Certification:** *Cybersecurity Fundamentals* (Jun 2023)")
+st.markdown('<div class="card">', unsafe_allow_html=True)
+st.write("- **Research Paper (IJEART):** *Integrating Blockchain in 5G Technologies* (Feb 2024)")
+st.write("- **Data Science Bootcamp (Udemy):** *Machine Learning and Data Analysis* (Jan 2025)")
+st.write("- **Google Cybersecurity Certification:** *Cybersecurity Fundamentals* (Jun 2023)")
+st.markdown('</div>', unsafe_allow_html=True)
 
 # --- EXTRACURRICULAR ---
 st.markdown('<h2>Extracurricular Activities</h2>', unsafe_allow_html=True)
 st.write("Beyond my academic and professional work, I am actively involved in various leadership and community roles.")
 
-with st.container(border=True):
-    st.write("""
-    - **Treasurer at STIC:** Managed a fund of over 50,000, handled event budgeting, and organized finances.
-    - **Workshop Organizer:** Organized 3 workshops and bootcamps for over 200 students, increasing participation by 50%.
-    - **Content Co-Lead at E-Cell Medicaps:** Led content strategy for promoting entrepreneurial awareness.
-    - **Content Creator:** Achieved over 2 million engagement on Instagram as a content creator.
-    """)
+st.markdown('<div class="card">', unsafe_allow_html=True)
+st.write("""
+- **Treasurer at STIC:** Managed a fund of over 50,000, handled event budgeting, and organized finances.
+- **Workshop Organizer:** Organized 3 workshops and bootcamps for over 200 students, increasing participation by 50%.
+- **Content Co-Lead at E-Cell Medicaps:** Led content strategy for promoting entrepreneurial awareness.
+- **Content Creator:** Achieved over 2 million engagement on Instagram as a content creator.
+""")
+st.markdown('</div>', unsafe_allow_html=True)
 
 
 # --- CONTACT ---
